@@ -1,0 +1,40 @@
+Q1: Review the data in "tmdb-5000.zip". (You can open .csv files using Microsoft Excel or any text editor.)
+
+Which normal form is it in? Justify your answer using the same terminology that we used in class.
+
+-----------------------------------
+The data is unnormalized form. As an example, the columns: cast and crew in the tmdb_5000_credits table have mutiple values in them in a single entry. i.e. they're not atomic.
+-----------------------------------
+
+Q2: Consider the file "tmdb_5000_movies.csv". Suppose that it only had two columns: id and genres. Assume that there are no other columns or tables.
+
+How can you restructure this data so that it is in the 3NF? Justify your answer.
+
+-----------------------------------
+As it stands, Isolating the columns: Id and Genre from the rest of the table forms a table that is unormalized as the genre column contains entries that contain multiple values (multiple genres and corresponding id). To make the table first normal form, a new column caled genre_id will be created that will contain the ids that correlate to genres, and all the genres that were previously in one entry will now be split into seperate entries, forming multiple tuples.
+Genres is a non-prime attribute that can be deduced from genre_id. As genre_id is a subset of the candiate key with Id, this is a violation of 2NF. To remedy this violation a new table is created with genre_id as the forign key and the genre attribute that has a dependency on genre_id. The original table is now just Id and genre_id.
+As there is no other non-key attribute other than genres, it is not possible for there to be a 3NF violation, therefore the table is already in third normal form.
+-----------------------------------
+
+Q3: Review the data in "movies.nt". You can use any text editor to open this file. You don't have to use Python scripts for this question, you can just use search in a text editor or Unix command line tools.
+
+List all genre names (e.g., Action, Comedy, etc.) for the movie represented by the blank node _:m_228161.
+
+-----------------------------------
+The movie Home has the following genres: Fantasy, Comedy, Animation, Science Fiction and Family
+-----------------------------------
+
+Q4: Consider the following sentence: "Adelaide is the state capital of South Australia" (you knew that, right?). Encode this information in N-Triples format. Appropriately use blank nodes, URIs and string literals. Note that the sentence has some implied information that also needs to be included (e.g., what is South Australia? Do you need to provide more context for how you just described South Australia?).
+
+You can use "movies.nt" as a reference. Paste your answer here, rather rather than creating a new .nt file.
+
+-----------------------------------
+_:c_AU <http://adelaide.edu.au/dbed/is-a> <http://adelaide.edu.au/dbed/country> .
+_:c_AU <http://adelaide.edu.au/dbed/hasName> "Australia"@en-US .
+_:s_SA <http://adelaide.edu.au/dbed/is-a> <http://adelaide.edu.au/dbed/state> .
+_:c_AU <http://adelaide.edu.au/dbed/hasState> _:s_SA .
+_:s_SA <http://adelaide.edu.au/dbed/hasName> "South Australia"@en-US .
+_:ci_A <http://adelaide.edu.au/dbed/is-a> <http://adelaide.edu.au/dbed/capitalCity> .
+_:c_SA <http://adelaide.edu.au/dbed/hasCapital> _:ci_A .
+_:ci_A <http://adelaide.edu.au/dbed/hasName> "Adelaide"@en-us
+-----------------------------------
